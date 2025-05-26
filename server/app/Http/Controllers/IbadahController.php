@@ -61,16 +61,31 @@ class IbadahController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ibadah $ibadah)
+    public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            "name" => "string|max:255",
+            "type" => "string|max:255",
+            "date" => "string|max:255",
+            "note" => "string|max:255",
+        ]);
+
+        $oldIbadah = Ibadah::findOrFail($id);
+        $ibadah = Ibadah::findOrFail($id);
+        $ibadah->update($request->all());
+        return response()->json([
+            "message" => "Ibadah $id berhasil diubah",
+            "original" => $oldIbadah,
+            "new" => $ibadah
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ibadah $ibadah)
+    public function destroy(string $id)
     {
+        $ibadah = Ibadah::findOrFail($id);
         $ibadah->delete();
         return response()->json([
             "message" => "Gelo ibadah di hapus yasudahlah",

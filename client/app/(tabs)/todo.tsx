@@ -22,7 +22,7 @@ export default function todo() {
   const colors = Colors[colorScheme ?? 'light'];
   const [siswas, setSiswas] = useState<Siswa[]>([]);
 
-  const API_URL = 'https://20fe-66-96-228-86.ngrok-free.app'
+  const API_URL = 'https://9fb9-182-253-179-88.ngrok-free.app'
 
   useEffect(() => {
     getSiswa();
